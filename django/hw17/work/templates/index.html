@@ -8,9 +8,10 @@
 </head>
 <body>
     <h1>Work Index</h1>
+    <a href="/work/new/">New</a>
     <ul>
         {% for w in work %}
-            <li>{{ work.title}} - {{work.title}}</li>
+            <li><a href="/work/{{w.pk}}"><p>이름 :  {{w.name}}</p><p>나이 :  {{w.age}}</p><p>생일 :   {{w.birthday}}</p><p>메일 :   {{w.email}}</p></a></li>
         {% endfor %}
     </ul>
 </body>

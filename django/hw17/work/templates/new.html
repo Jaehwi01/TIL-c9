@@ -7,10 +7,12 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/posts/create/" method="post">
+    <form action="/work/create/" method="post">
         {% csrf_token %}
-        <input type="text" name="title"/>
-        <input type="text" name="content"/>
+        <input type="text" name="name"/>
+        <input type="text" name="age"/>
+        <input type="email" name="email"/>
+        <input type="birthday" name="birthday"/>
         <input type="submit" value="Submit"/>
     </form>
 </body>
