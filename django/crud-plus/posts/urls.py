@@ -1,0 +1,14 @@
+from django.urls import path, include
+from . import views
+
+app_name = 'posts'
+urlpatterns = [
+    path('naver/<str:q>/', views.naver),
+    path('', views.index, name='list'),
+    path('create/', views.create, name='create'),
+    path('write/', views.new, name='new'),
+    path('<int:post_id>/', views.detail, name='detail'),  #view의 변수이름과 동일하게.
+    path('<int:post_id>/delete/', views.delete, name='delete'),
+    path('<int:post_id>/edit/', views.edit, name='edit'),
+    path('<int:post_id>/update/', views.update, name='update'),
+]
