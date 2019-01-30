@@ -1,5 +1,5 @@
 """
-WSGI config for prac project.
+WSGI config for menu project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'prac.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'menu.settings')
 
 application = get_wsgi_application()
