@@ -7,7 +7,7 @@ def create(request):
         form = ArticleModelForm(request.POST)
         if form.is_valid():
             article=form.save()
-            # title = form.cleaned_data.get('title')  #< ModelForm 일땐 ['title']로?
+            # title = form.cleaned_data.get('title')  # == cleaned_data['title']
             # content = form.cleaned_data.get('content')        
             # article = Article(title=title, content=content)
             # article.save()
