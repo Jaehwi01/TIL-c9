@@ -42,4 +42,4 @@ def logout(request):
 def people(request,username):
     # get_user_model() #=> User
     people = get_object_or_404(get_user_model(), username=username)
-    return render(request, 'accounts/people.html', {'people':people})    
+    return render(request, 'accounts/people.html', {'people'})    
