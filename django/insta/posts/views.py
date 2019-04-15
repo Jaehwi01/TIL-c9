@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_http_methods
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, ImageFormSet
 from .models import Post
 from .models import comment as Comment
+from django.db import transaction
 
 # Create your views here.
 
@@ -15,16 +16,25 @@ def list(request):
 @login_required
 def create(request):
     if request.method=='POST':
-        post_form = PostForm(request.POST, request.FILES)
-        if post_form.is_valid():
+        post_form = PostForm(request.POST)
+        image_formset = ImageFormSet(request.POST, request.FILES)
+        if post_form.is_valid() and image_formset.is_valid():
             post=post_form.save(commit=False)
             post.user=request.user
-            post_form.save() #실제 데이터베이스에 저장
+            
+            with transaction.atomic():
+                post.save() #실제 데이터베이스에 저장
+                image_formset.instance = post
+                image_formset.save()
             return redirect('posts:list')
+            
     else:
         post_form = PostForm()
-   
-    return render(request,'posts/form.html',{'post_form':post_form})
+        image_formset=ImageFormSet()
+            
+    return render(request,'posts/form.html',{'post_form':post_form,
+                                            'image_formset':image_formset
+                                                })
 @login_required
 def delete(request,post_id):
     # post=Post.objects.get(pk=post_id)
@@ -43,14 +53,16 @@ def update(request,post_id):
     if post.user != request.user:
         return redirect('posts:list')
     if request.method == 'POST':
-        post_form = PostForm(request.POST, request.FILES, instance=post)
-        if post_form.is_valid():
+        post_form = PostForm(request.POST, instance=post)
+        image_formset = ImageFormSet(request.POST, request.FILES, instance=post)
+        if post_form.is_valid() and image_formset.is_valid():
             post_form.save()
+            image_formset.save()
             return redirect('posts:list')
     else:
         post_form = PostForm(instance=post)
-    post_form = PostForm(instance=post)
-    return render(request, 'posts/form.html',{'post_form':post_form})
+        image_formset = ImageFormSet(instance=post)
+    return render(request, 'posts/form.html',{'post_form':post_form,'image_formset':image_formset})
     
 @require_POST
 def comment_create(request, post_id):
