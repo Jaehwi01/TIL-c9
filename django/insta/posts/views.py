@@ -54,7 +54,7 @@ def delete(request,post_id):
     post=get_object_or_404(Post, pk=post_id) #pk=id 로 고쳐써도됨
     if post.user != request.user:
         return redirect('posts:list')
-    
+
     post.delete()
     return redirect('posts:list')
     
@@ -106,3 +106,7 @@ def like(request, post_id):
     #2. 좋취
         post.like_users.add(request.user)
     return redirect('posts:list')
+
+def look
+    
+    
