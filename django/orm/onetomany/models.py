@@ -47,6 +47,13 @@ class Comment(models.Model):
 # 8. 댓글 중에해당 게시글의 제목에 '1'이 들어가 있는 것은?
 # comment.objects.filter(post__title__contains='1')
 
+
+#병원에 오는 사람들을 기록하는 시스템을 만들예정.
+# 필수적인 모델은 환자와 의사
+# 어떠한 관계로 표현?
+
+
+
 # user1 = User.objects.create(name='kim')
 # user2 = User.objects.create(name='lee')
 
@@ -61,3 +68,4 @@ class Comment(models.Model):
 # c5 = Comment.objects.create(content='2글1댓글', user=user1, post=post2)
 # c6 = Comment.objects.create(content='!1글5댓글', user=user2, post=post1)
 # c7 = Comment.objects.create(content='!1글2댓글', user=user2, post=post2)
+
