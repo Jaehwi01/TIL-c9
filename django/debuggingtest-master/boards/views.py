@@ -7,9 +7,7 @@ from .forms import BoardForm, CommentForm
 # Create your views here.
 def list(request):
     boards = Board.objects.order_by('-pk')
-    ctx = {
-        'boards': boards,
-    }
+    ctx = {'boards': boards,}
     return render(request, 'boards/list.html', ctx)
 
 def detail(request, board_pk):

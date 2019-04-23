@@ -12,7 +12,8 @@ def explore(request):
     posts = Post.objects.order_by('-id').all()
     comment_form = CommentForm()
     return render(request,'posts/list.html', {'posts':posts, 'comment_form': comment_form})
-
+ 
+ ............................................................................................................................................................................................0
 @login_required
 def list(request):
     # posts=Post.objects.order_by('-id').all()

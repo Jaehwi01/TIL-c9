@@ -15,7 +15,7 @@ class Comment(models.Model):
     content = models.TextField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-
+    
 # 예시
 # 1. 1번 사람이 작성한 게시글은?
 # user1.post_set.all()
@@ -67,5 +67,5 @@ class Comment(models.Model):
 # c4 = Comment.objects.create(content='1글4댓글', user=user2, post=post1)
 # c5 = Comment.objects.create(content='2글1댓글', user=user1, post=post2)
 # c6 = Comment.objects.create(content='!1글5댓글', user=user2, post=post1)
-# c7 = Comment.objects.create(content='!1글2댓글', user=user2, post=post2)
+# c7 = Comment.objects.create(content='!1글2c2댓글', user=user2, post=post2)
 
