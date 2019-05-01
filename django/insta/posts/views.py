@@ -6,14 +6,14 @@ from .models import Post
 from .models import comment as Comment
 from django.db import transaction
 from itertools import chain
+from django.http import JsonResponse
 
 # Create your views here.
 def explore(request):
     posts = Post.objects.order_by('-id').all()
     comment_form = CommentForm()
     return render(request,'posts/list.html', {'posts':posts, 'comment_form': comment_form})
- 
- ............................................................................................................................................................................................0
+
 @login_required
 def list(request):
     # posts=Post.objects.order_by('-id').all()
@@ -100,14 +100,12 @@ def comment_delete(request,post_id,comment_id):
 def like(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if request.user in post.like_users.all():
-    #1. 좋아요
+    #2. 좋아요취
         post.like_users.remove(request.user)
+        liked = False
         
     else:
-    #2. 좋취
+    #1. 좋
         post.like_users.add(request.user)
-    return redirect('posts:list')
-
-def look
-    
-    
+        liked =True
+    return JsonResponse({'liked':liked, 'count':post.like_users.count()})

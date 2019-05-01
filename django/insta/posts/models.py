@@ -26,3 +26,7 @@ class comment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)#첫번쨰인자는 어떠한 것이랑 관계를 할건지.
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content= models.TextField()
+    
+    
+    
+
