@@ -29,7 +29,35 @@
                 }
                 
             })
-})
-})
+    })
+    })
+    const commentForm = document.querySelectorAll('.comment-form')
+    commentForm.forEach(function(form){
+        form.addEventListener('submit',function(event){
+            event.preventDefault()
+            console.log(event)
+            // event.target == form
+            const data = new FormData(event.target) //  new라는건. 인스턴스생성
+            // Inspect FormData
+            // for (const item of data.entries()){
+            //     console.log(item)
+            
+            axios.post(event.target.action, data)
+                .then(function(response){
+                    const comment =response.data
+                    const commentList=document.querySelector(`#comment-list-${comment.postId}`)
+                    const newComment = 
+                    `<div class="card-text"><strong>${ comment.username }</strong>${ comment.content }
+                    
+                    <a href="/posts/${comment.postId}/comments/${comment.id}/delete/">삭제</a>
+                    
+                    </div>
+                    `
+                    commentList.insertAdjacentHTML('beforeend',newComment)
+                    event.target.reset()
+                })
+        })
+    })
+
 </script>
 {% endblock %}
